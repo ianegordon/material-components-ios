@@ -27,7 +27,6 @@
   [super viewDidLoad];
 
   MDCButtonBar *buttonBar = [[MDCButtonBar alloc] init];
-  buttonBar.backgroundColor = [self buttonBarBackgroundColor];
 
   // MDCButtonBar ignores the style of UIBarButtonItem.
   UIBarButtonItemStyle ignored = UIBarButtonItemStyleDone;
@@ -48,7 +47,8 @@
   // Set the title text attributes before assigning to buttonBar.items
   // because of https://github.com/material-components/material-components-ios/issues/277
   for (UIBarButtonItem *item in items) {
-    [item setTitleTextAttributes:[self itemTitleTextAttributes] forState:UIControlStateNormal];
+    [item setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] }
+                        forState:UIControlStateNormal];
   }
 
   buttonBar.items = items;
@@ -64,24 +64,13 @@
   [self.view addSubview:buttonBar];
 
   // Ensure that the controller's view isn't transparent.
-  self.view.backgroundColor = [UIColor whiteColor];
+  self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
 }
 
 #pragma mark - User actions
 
 - (void)didTapActionButton:(id)sender {
   NSLog(@"Did tap action item: %@", sender);
-}
-
-#pragma mark - Visual configuration
-
-- (UIColor *)buttonBarBackgroundColor {
-  return [UIColor colorWithRed:0.012 green:0.663 blue:0.957 alpha:0.2];
-}
-
-- (NSDictionary *)itemTitleTextAttributes {
-  UIColor *textColor = [UIColor colorWithWhite:0 alpha:0.8];
-  return @{NSForegroundColorAttributeName : textColor};
 }
 
 @end

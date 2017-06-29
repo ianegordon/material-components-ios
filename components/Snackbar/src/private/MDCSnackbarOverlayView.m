@@ -18,12 +18,12 @@
 
 #import "MDCSnackbarOverlayView.h"
 
-#import "MDCSnackbarMessageView.h"
+#import "MaterialSnackbar.h"
 #import "MDCSnackbarMessageViewInternal.h"
 #import "MaterialAnimationTiming.h"
 #import "MaterialKeyboardWatcher.h"
-#import "MaterialOverlays.h"
-#import "UIApplication+AppExtensions.h"
+#import "MaterialOverlay.h"
+#import "MaterialApplication.h"
 
 NSString *const MDCSnackbarOverlayIdentifier = @"MDCSnackbar";
 
@@ -191,7 +191,7 @@ static const CGFloat kMaximumHeight = 80.0f;
  change at any time during runtime.
  */
 - (CGFloat)dynamicBottomMargin {
-  CGFloat keyboardHeight = self.watcher.keyboardOffset;
+  CGFloat keyboardHeight = self.watcher.visibleKeyboardHeight;
   CGFloat userHeight = self.bottomOffset;
 
   return MAX(keyboardHeight, userHeight);

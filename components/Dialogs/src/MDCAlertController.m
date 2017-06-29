@@ -52,7 +52,7 @@
 
 @end
 
-// https://material.google.com/components/dialogs.html#dialogs-specs
+// https://material.io/guidelines/components/dialogs.html#dialogs-specs
 static const UIEdgeInsets MDCDialogContentInsets = {24.0, 24.0, 24.0, 24.0};
 static const CGFloat MDCDialogContentVerticalPadding = 20.0;
 
@@ -62,7 +62,7 @@ static const CGFloat MDCDialogActionsVerticalPadding = 8.0;
 static const CGFloat MDCDialogActionButtonHeight = 36.0;
 static const CGFloat MDCDialogActionButtonMinimumWidth = 48.0;
 
-static const CGFloat MDCDialogMessageOpacity = 0.38f;
+static const CGFloat MDCDialogMessageOpacity = 0.54f;
 
 @interface MDCAlertController ()
 
@@ -171,7 +171,6 @@ static const CGFloat MDCDialogMessageOpacity = 0.38f;
   actionButton.mdc_adjustsFontForContentSizeCategory = self.mdc_adjustsFontForContentSizeCategory;
   [actionButton setTitle:action.title forState:UIControlStateNormal];
   // TODO(iangordon): Determine default text color values for Normal and Disabled
-  [actionButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
   [actionButton sizeToFit];
   CGRect buttonRect = actionButton.bounds;
   buttonRect.size.height = MAX(buttonRect.size.height, MDCDialogActionButtonHeight);
@@ -398,8 +397,7 @@ static const CGFloat MDCDialogMessageOpacity = 0.38f;
         UIUserInterfaceLayoutDirectionRightToLeft) {
       for (UIButton *button in self.actionButtons) {
         CGRect buttonRect = button.frame;
-        CGRect flippedRect = MDCRectFlippedForRTL(buttonRect,
-                                                  CGRectGetWidth(self.view.bounds),
+        CGRect flippedRect = MDCRectFlippedForRTL(buttonRect, CGRectGetWidth(self.view.bounds),
                                                   UIUserInterfaceLayoutDirectionRightToLeft);
         button.frame = flippedRect;
       }

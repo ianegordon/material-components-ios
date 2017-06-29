@@ -33,10 +33,9 @@
   self.title = @"Navigation Bar";
 
   self.navBar = [[MDCNavigationBar alloc] initWithFrame:CGRectZero];
+  self.navBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
   [self.navBar observeNavigationItem:self.navigationItem];
 
-  // Light blue 500
-  [self.navBar setBackgroundColor:[UIColor colorWithRed:0.012 green:0.663 blue:0.957 alpha:1]];
   MDCNavigationBarTextColorAccessibilityMutator *mutator =
       [[MDCNavigationBarTextColorAccessibilityMutator alloc] init];
   [mutator mutate:self.navBar];

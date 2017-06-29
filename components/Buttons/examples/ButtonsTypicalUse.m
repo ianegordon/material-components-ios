@@ -27,11 +27,14 @@
 
 - (void)viewDidLoad {
   [super viewDidLoad];
-  self.view.backgroundColor = [UIColor whiteColor];
+
+  self.view.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1.0];
+  UIColor *titleColor = [UIColor whiteColor];
 
   // Raised button
 
   MDCRaisedButton *raisedButton = [[MDCRaisedButton alloc] init];
+  [raisedButton setTitleColor:titleColor forState:UIControlStateNormal];
   [raisedButton setTitle:@"Button" forState:UIControlStateNormal];
   [raisedButton sizeToFit];
   [raisedButton addTarget:self
@@ -43,6 +46,7 @@
   // Disabled raised button
 
   MDCRaisedButton *disabledRaisedButton = [[MDCRaisedButton alloc] init];
+  [disabledRaisedButton setTitleColor:titleColor forState:UIControlStateNormal];
   [disabledRaisedButton setTitle:@"Button" forState:UIControlStateNormal];
   [disabledRaisedButton sizeToFit];
   [disabledRaisedButton addTarget:self
@@ -80,6 +84,7 @@
   // Floating action button
 
   MDCFloatingButton *floatingButton = [[MDCFloatingButton alloc] init];
+  [floatingButton setTitleColor:titleColor forState:UIControlStateNormal];
   [floatingButton sizeToFit];
   [floatingButton addTarget:self
                      action:@selector(didTap:)

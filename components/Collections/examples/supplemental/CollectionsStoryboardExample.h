@@ -18,5 +18,5 @@
 
 #import "MaterialCollections.h"
 
-@interface CollectionsStoryboardExample : MDCCollectionViewController
+@interface CollectionsStoryboardExample : UICollectionViewController
 @end

@@ -18,5 +18,5 @@
 
 #import "MaterialCollections.h"
 
-@interface CollectionsALaCarteExample : MDCCollectionViewController
+@interface CollectionsALaCarteExample : UICollectionViewController
 @end

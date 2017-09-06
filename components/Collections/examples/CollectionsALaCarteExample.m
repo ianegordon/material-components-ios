@@ -25,22 +25,22 @@ static NSString *const kReusableIdentifierItem = @"itemCellIdentifier";
 #pragma mark - Custom Collection view
 
 /** A custom collection view. */
-@interface CustomCollectionView : UICollectionView
-@end
-
-@implementation CustomCollectionView
-
-- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout {
-  self = [super initWithFrame:frame collectionViewLayout:layout];
-  if (self) {
-    // Our custom collection view settings.
-    self.backgroundColor = [UIColor lightGrayColor];
-    self.contentInset = UIEdgeInsetsMake(40, 20, 40, 20);
-  }
-  return self;
-}
-
-@end
+//@interface CustomCollectionView : UICollectionView
+//@end
+//
+//@implementation CustomCollectionView
+//
+//- (instancetype)initWithFrame:(CGRect)frame collectionViewLayout:(UICollectionViewLayout *)layout {
+//  self = [super initWithFrame:frame collectionViewLayout:layout];
+//  if (self) {
+//    // Our custom collection view settings.
+//    self.backgroundColor = [UIColor lightGrayColor];
+//    self.contentInset = UIEdgeInsetsMake(40, 20, 40, 20);
+//  }
+//  return self;
+//}
+//
+//@end
 
 #pragma mark - CollectionsALaCarteExample
 
@@ -49,16 +49,18 @@ static NSString *const kReusableIdentifierItem = @"itemCellIdentifier";
  styling and editing capabilities of the MDCCollectionViewController class.
  */
 @implementation CollectionsALaCarteExample {
-  CustomCollectionView *_customCollectionView;
+  UICollectionView *_customCollectionView;
   NSMutableArray *_content;
 }
 
 - (void)viewDidLoad {
   [super viewDidLoad];
 
+  MDCCollectionViewFlowLayout *layout = [[MDCCollectionViewFlowLayout alloc] init];
+
   // Here we are setting a custom collection view.
-  _customCollectionView = [[CustomCollectionView alloc] initWithFrame:self.collectionView.frame
-                                                 collectionViewLayout:self.collectionViewLayout];
+  _customCollectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds
+                                                 collectionViewLayout:layout];
   self.collectionView = _customCollectionView;
 
   // Register cell class.
@@ -77,7 +79,7 @@ static NSString *const kReusableIdentifierItem = @"itemCellIdentifier";
   }
 
   // Customize collection view settings.
-  self.styler.cellStyle = MDCCollectionViewCellStyleCard;
+//  self.styler.cellStyle = MDCCollectionViewCellStyleCard;
 }
 
 #pragma mark - <UICollectionViewDataSource>
@@ -96,6 +98,7 @@ static NSString *const kReusableIdentifierItem = @"itemCellIdentifier";
   MDCCollectionViewTextCell *cell =
       [collectionView dequeueReusableCellWithReuseIdentifier:kReusableIdentifierItem
                                                 forIndexPath:indexPath];
+  cell.inkView.inkColor = [UIColor purpleColor];
   cell.textLabel.text = _content[indexPath.section][indexPath.item];
   return cell;
 }
@@ -123,7 +126,7 @@ static NSString *const kReusableIdentifierItem = @"itemCellIdentifier";
 #pragma mark - CatalogByConvention
 
 + (NSArray *)catalogBreadcrumbs {
-  return @[ @"Collections", @"Collections À la carte" ];
+  return @[ @"..Collections", @"Collections À la carte" ];
 }
 
 + (BOOL)catalogIsPrimaryDemo {

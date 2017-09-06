@@ -43,8 +43,12 @@ static NSString *const kReusableIdentifierItem = @"customCell";
     [_content addObject:items];
   }
 
+//  self.collectionViewLayout.
+  [self.collectionView registerClass:[MDCCollectionViewTextCell class]
+          forCellWithReuseIdentifier:kReusableIdentifierItem];
+
   // Customize collection view settings.
-  self.styler.cellStyle = MDCCollectionViewCellStyleCard;
+//  self.styler.cellStyle = MDCCollectionViewCellStyleCard;
 }
 
 #pragma mark - <UICollectionViewDataSource>
@@ -60,10 +64,11 @@ static NSString *const kReusableIdentifierItem = @"customCell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-  CollectionStoryboardExampleCell *cell =
+  MDCCollectionViewTextCell *cell = (MDCCollectionViewTextCell *)
+//  CollectionStoryboardExampleCell *cell =
       [collectionView dequeueReusableCellWithReuseIdentifier:kReusableIdentifierItem
                                                 forIndexPath:indexPath];
-  cell.label.text = _content[indexPath.section][indexPath.item];
+  cell.textLabel.text = _content[indexPath.section][indexPath.item];
 
   return cell;
 }
@@ -71,7 +76,7 @@ static NSString *const kReusableIdentifierItem = @"customCell";
 #pragma mark - CatalogByConvention
 
 + (NSArray *)catalogBreadcrumbs {
-  return @[ @"Collections", @"Storyboard Example" ];
+  return @[ @"...Collections", @"Storyboard Example" ];
 }
 
 + (NSString *)catalogStoryboardName {

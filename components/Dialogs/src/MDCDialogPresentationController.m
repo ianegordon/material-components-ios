@@ -240,16 +240,27 @@ static UIEdgeInsets MDCDialogEdgeInsets = {24, 20, 24, 20};
 
 - (void)viewWillTransitionToSize:(CGSize)size
        withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+  NSLog(@"viewWillTransitionToSize %.0f x %.0f", size.width, size.height);
   [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 
   [coordinator animateAlongsideTransition:
       ^(__unused id<UIViewControllerTransitionCoordinatorContext> context) {
+        NSLog(@"animationBlock %.0f x %.0f", size.width, size.height);
         self.dimmingView.frame = self.containerView.bounds;
         CGRect presentedViewFrame = [self frameOfPresentedViewInContainerView];
         self.presentedView.frame = presentedViewFrame;
         self.trackingView.frame = presentedViewFrame;
       }
-                               completion:NULL];
+                               completion:^(__unused id<UIViewControllerTransitionCoordinatorContext> context) {
+                                 UIApplication *application = [[UIApplication class] performSelector:@selector(sharedApplication)];
+                                 if (application.applicationState == UIApplicationStateActive) {
+                                   NSLog(@"animationComplete (ACTIVE) %.0f x %.0f", size.width, size.height);
+                                 } else if (application.applicationState == UIApplicationStateInactive) {
+                                   NSLog(@"animationComplete (INACTIVE) %.0f x %.0f", size.width, size.height);
+                                 } else {
+                                   NSLog(@"animationComplete (BACKGROUND) %.0f x %.0f", size.width, size.height);
+                                 }
+                               }];
 }
 
 /**

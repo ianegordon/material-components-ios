@@ -96,6 +96,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     return true
   }
+
+  func applicationDidBecomeActive(_ application: UIApplication) {
+    NSLog("applicationDidBecomeActive")
+  }
+
+  func applicationWillResignActive(_ application: UIApplication) {
+    NSLog("applicationWillResignActive")
+  }
+
 }
 
 extension UINavigationController: UIGestureRecognizerDelegate {

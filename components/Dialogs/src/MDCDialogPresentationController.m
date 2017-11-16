@@ -249,16 +249,17 @@ static UIEdgeInsets MDCDialogEdgeInsets = {24, 20, 24, 20};
         self.dimmingView.frame = self.containerView.bounds;
         CGRect presentedViewFrame = [self frameOfPresentedViewInContainerView];
         self.presentedView.frame = presentedViewFrame;
-        self.trackingView.frame = presentedViewFrame;
+        // Moved to completion to try on mimic an internal client
+//        self.trackingView.frame = presentedViewFrame;
       }
                                completion:^(__unused id<UIViewControllerTransitionCoordinatorContext> context) {
+                                 CGRect presentedViewFrame = [self frameOfPresentedViewInContainerView];
                                  UIApplication *application = [[UIApplication class] performSelector:@selector(sharedApplication)];
                                  if (application.applicationState == UIApplicationStateActive) {
                                    NSLog(@"animationComplete (ACTIVE) %.0f x %.0f", size.width, size.height);
-                                 } else if (application.applicationState == UIApplicationStateInactive) {
-                                   NSLog(@"animationComplete (INACTIVE) %.0f x %.0f", size.width, size.height);
+                                   self.trackingView.frame = presentedViewFrame;
                                  } else {
-                                   NSLog(@"animationComplete (BACKGROUND) %.0f x %.0f", size.width, size.height);
+                                   NSLog(@"animationComplete (INACTIVE) %.0f x %.0f", size.width, size.height);
                                  }
                                }];
 }

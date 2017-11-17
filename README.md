@@ -1,4 +1,4 @@
-# Material Components for iOS
+# Material Components for iOS (Woot!)
 
 <img align="right" src="mdc_hero.png" width="300px">
 
